@@ -2,6 +2,20 @@ import pandas as pd
 import streamlit as st
 import requests
 
+# --- Autenticazione ---
+names = ['Mario Rossi']
+usernames = ['mrossi']
+passwords = ['abc123']
+
+hashed_passwords = stauth.Hasher(passwords).generate()
+authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
+    'my_app', 'abcdef', cookie_expiry_days=30)
+
+name, authentication_status, username = authenticator.login('Login', 'main')
+
+if authentication_status:
+    authenticator.logout('Logout', 'sidebar')
+    st.success(f'Benvenuto, {name}!')
 # Titolo dell'app
 st.title("Analisi Cash Flow Immobiliare USA")
 
